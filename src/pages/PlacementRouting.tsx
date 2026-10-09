@@ -19,7 +19,7 @@ const actionColors = {
 
 export default function PlacementRouting() {
   return (
-    <div className="p-6 flex flex-col gap-5 h-full">
+    <div className="px-[24px] py-[20px] flex flex-col gap-[20px] h-full">
       <PageHeader
         title="Placement & routing"
         subtitle="Autoscaler places by latency and landed cost — not price alone. Preview before you enforce."
@@ -31,33 +31,33 @@ export default function PlacementRouting() {
         }
       />
 
-      <div className="flex gap-4">
-        <Card className="flex-1 flex flex-col gap-3">
+      <div className="flex gap-[16px]">
+        <Card className="flex-1 flex flex-col gap-[12px]">
           <span className="text-[#6b7385] text-[10px] font-medium">PLACEMENT WEIGHTS</span>
           <span className="text-[#171c29] text-[13px] font-semibold">Latency 45% · Warm floor 25% · Landed cost 20% · Availability 10%</span>
-          <span className="text-[#6b7385] text-xs">Price is no longer the sole input. Egress and data locality feed landed cost.</span>
+          <span className="text-[#6b7385] text-[12px]">Price is no longer the sole input. Egress and data locality feed landed cost.</span>
         </Card>
 
-        <Card className="flex-1 flex flex-col gap-3">
+        <Card className="flex-1 flex flex-col gap-[12px]">
           <span className="text-[#6b7385] text-[10px] font-medium">HARD CONSTRAINTS</span>
           <span className="text-[#171c29] text-[13px] font-semibold">Max p95 80 ms · Min warm floor 50% · No training on edges</span>
-          <span className="text-[#6b7385] text-xs">Violations block placement instead of soft-warning.</span>
+          <span className="text-[#6b7385] text-[12px]">Violations block placement instead of soft-warning.</span>
         </Card>
 
-        <Card className="flex-1 flex flex-col gap-3">
+        <Card className="flex-1 flex flex-col gap-[12px]">
           <span className="text-[#6b7385] text-[10px] font-medium">WHAT-IF PREVIEW</span>
           <span className="text-[#171c29] text-[13px] font-semibold">eu-west H100 stockout → us-east</span>
-          <span className="text-[#6b7385] text-xs">Est. p95 52 ms · +$0.04/GPU-h egress · warm floor holds</span>
+          <span className="text-[#6b7385] text-[12px]">Est. p95 52 ms · +$0.04/GPU-h egress · warm floor holds</span>
           <Pill variant="green">Recommended</Pill>
         </Card>
       </div>
 
-      <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
         <span className="text-[#6b7385] text-[10px] font-medium">LATENCY × LANDED COST MATRIX</span>
-        <span className="text-[#171c29] text-sm font-semibold">Candidate edges for llama-70b-chat when home is constrained</span>
+        <span className="text-[#171c29] text-[14px] font-semibold">Candidate edges for llama-70b-chat when home is constrained</span>
         
-        <div className="border border-[#e0e5ed] rounded-lg overflow-hidden flex-1">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-9 px-2 text-[11px] font-medium text-[#6b7385]">
+        <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden flex-1">
+          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
             <span className="w-[140px]">Edge</span>
             <span className="w-[120px]">p95 to users</span>
             <span className="w-[100px]">Warm floor</span>
@@ -68,7 +68,7 @@ export default function PlacementRouting() {
             <span className="w-[120px]">Action</span>
           </div>
           {matrixData.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-12 px-2 text-xs">
+            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px]">
               <span className="w-[140px] text-[#171c29] font-semibold">{row.edge}</span>
               <span className="w-[120px] text-[#171c29] font-semibold">{row.p95}</span>
               <span className="w-[100px] text-[#171c29] font-semibold">{row.floor}</span>

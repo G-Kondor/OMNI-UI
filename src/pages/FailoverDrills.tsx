@@ -17,7 +17,7 @@ const colors = {
 
 export default function FailoverDrills() {
   return (
-    <div className="p-6 flex flex-col gap-5 h-full">
+    <div className="px-[24px] py-[20px] flex flex-col gap-[20px] h-full">
       <PageHeader
         title="Failover drills & SLO"
         subtitle="Prove the guarantee: scheduled drills, p95 and time-to-capacity reports, approval before execute"
@@ -29,35 +29,35 @@ export default function FailoverDrills() {
         }
       />
 
-      <div className="flex gap-3">
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-4 flex-1 min-w-0 flex flex-col gap-3">
+      <div className="flex gap-[12px]">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">SLO AVAILABILITY</span>
-          <span className="text-[24px] font-bold text-[#219e66]">99.94%</span>
-          <span className="text-[#6b7385] text-xs">Target 99.9%</span>
+          <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">99.94%</span>
+          <span className="text-[#6b7385] text-[12px] mt-[12px]">Target 99.9%</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-4 flex-1 min-w-0 flex flex-col gap-3">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">DRILL SUCCESS</span>
-          <span className="text-[24px] font-bold text-[#219e66]">4 / 4</span>
-          <span className="text-[#6b7385] text-xs">Last 90 days</span>
+          <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">4 / 4</span>
+          <span className="text-[#6b7385] text-[12px] mt-[12px]">Last 90 days</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-4 flex-1 min-w-0 flex flex-col gap-3">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">MEDIAN TTC</span>
-          <span className="text-[24px] font-bold text-[#171c29]">2.4 min</span>
-          <span className="text-[#6b7385] text-xs">Time-to-capacity</span>
+          <span className="text-[28px] font-bold text-[#171c29] leading-[34px] mt-[12px]">2.4 min</span>
+          <span className="text-[#6b7385] text-[12px] mt-[12px]">Time-to-capacity</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-4 flex-1 min-w-0 flex flex-col gap-3">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">WORST P95</span>
-          <span className="text-[24px] font-bold text-[#d9851a]">52 ms</span>
-          <span className="text-[#6b7385] text-xs">During us-east spillover</span>
+          <span className="text-[28px] font-bold text-[#d9851a] leading-[34px] mt-[12px]">52 ms</span>
+          <span className="text-[#6b7385] text-[12px] mt-[12px]">During us-east spillover</span>
         </div>
       </div>
 
-      <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
         <span className="text-[#6b7385] text-[10px] font-medium">DRILL HISTORY</span>
         <span className="text-[#6b7385] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
         
-        <div className="border border-[#e0e5ed] rounded-lg overflow-hidden">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-9 px-2 text-[11px] font-medium text-[#6b7385]">
+        <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden">
+          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
             <span className="w-[180px]">Drill</span>
             <span className="w-[110px]">Triggered</span>
             <span className="w-[200px]">Scenario</span>
@@ -67,7 +67,7 @@ export default function FailoverDrills() {
             <span className="w-[160px]">State</span>
           </div>
           {drillHistory.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-12 px-2 text-xs">
+            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px]">
               <span className="w-[180px] text-[#171c29] font-semibold">{row.drill}</span>
               <span className="w-[110px] text-[#171c29] font-semibold">{row.triggered}</span>
               <span className="w-[200px] text-[#171c29] font-semibold">{row.scenario}</span>
@@ -79,11 +79,11 @@ export default function FailoverDrills() {
           ))}
         </div>
 
-        <div className="bg-[#e5edff] rounded-lg h-[72px] flex items-center justify-between px-4">
+        <div className="bg-[#e5edff] rounded-[8px] h-[72px] flex items-center justify-between px-[16px]">
           <span className="text-[#171c29] text-[13px] font-medium">
             Ready to preview: drill-2026-10-20 — cordon eu-west-1 for 10 min. Expected spillover to us-east. Warm floor stays ≥ 4 GPUs.
           </span>
-          <div className="flex gap-2">
+          <div className="flex gap-[8px]">
             <Button>Discard</Button>
             <Button variant="primary">Execute drill</Button>
           </div>
