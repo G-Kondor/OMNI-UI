@@ -46,7 +46,7 @@ export default function InferenceEndpoints() {
         <span className="text-[#6b7385] text-[10px] font-medium">ENDPOINTS</span>
         
         <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
+          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
             <span className="w-[180px]">Endpoint</span>
             <span className="w-[220px]">Model</span>
             <span className="w-[140px]">Home</span>
@@ -56,7 +56,7 @@ export default function InferenceEndpoints() {
             <span className="w-[100px]">Status</span>
           </div>
           {endpoints.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px] hover:bg-gray-50 cursor-pointer">
+            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px] hover:bg-gray-50 cursor-pointer">
               <span className="w-[180px] text-[#171c29] font-semibold">{row.name}</span>
               <span className="w-[220px] text-[#171c29]">{row.model}</span>
               <span className="w-[140px] text-[#171c29]">{row.home}</span>
