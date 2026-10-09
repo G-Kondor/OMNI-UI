@@ -46,7 +46,7 @@ export default function InferenceCapacity() {
           <span className="text-[#171c29] text-[13px] font-semibold">Home: eu-central-1 → Preferred edges by p95</span>
           
           <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden flex-1">
-            <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
+            <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
               <span className="w-[140px]">Edge</span>
               <span className="w-[130px]">Region</span>
               <span className="w-[90px]">p95</span>
@@ -55,7 +55,7 @@ export default function InferenceCapacity() {
               <span className="w-[90px]">Status</span>
             </div>
             {latencyData.map((row, i) => (
-              <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px]">
+              <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px]">
                 <span className="w-[140px] text-[#171c29]">{row.edge}</span>
                 <span className="w-[130px] text-[#171c29]">{row.region}</span>
                 <span className="w-[90px] text-[#171c29]">{row.p95}</span>

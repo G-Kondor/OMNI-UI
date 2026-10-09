@@ -57,7 +57,7 @@ export default function PlacementRouting() {
         <span className="text-[#171c29] text-[14px] font-semibold">Candidate edges for llama-70b-chat when home is constrained</span>
         
         <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden flex-1">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
+          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
             <span className="w-[140px]">Edge</span>
             <span className="w-[120px]">p95 to users</span>
             <span className="w-[100px]">Warm floor</span>
@@ -68,7 +68,7 @@ export default function PlacementRouting() {
             <span className="w-[120px]">Action</span>
           </div>
           {matrixData.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px]">
+            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px]">
               <span className="w-[140px] text-[#171c29] font-semibold">{row.edge}</span>
               <span className="w-[120px] text-[#171c29] font-semibold">{row.p95}</span>
               <span className="w-[100px] text-[#171c29] font-semibold">{row.floor}</span>

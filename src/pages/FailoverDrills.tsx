@@ -30,22 +30,22 @@ export default function FailoverDrills() {
       />
 
       <div className="flex gap-[12px]">
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">SLO AVAILABILITY</span>
           <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">99.94%</span>
           <span className="text-[#6b7385] text-[12px] mt-[12px]">Target 99.9%</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">DRILL SUCCESS</span>
           <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">4 / 4</span>
           <span className="text-[#6b7385] text-[12px] mt-[12px]">Last 90 days</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">MEDIAN TTC</span>
           <span className="text-[28px] font-bold text-[#171c29] leading-[34px] mt-[12px]">2.4 min</span>
           <span className="text-[#6b7385] text-[12px] mt-[12px]">Time-to-capacity</span>
         </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] px-[17px] py-[17px] flex-1 min-w-0 flex flex-col">
+        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
           <span className="text-[#6b7385] text-[10px] font-medium">WORST P95</span>
           <span className="text-[28px] font-bold text-[#d9851a] leading-[34px] mt-[12px]">52 ms</span>
           <span className="text-[#6b7385] text-[12px] mt-[12px]">During us-east spillover</span>
@@ -57,7 +57,7 @@ export default function FailoverDrills() {
         <span className="text-[#6b7385] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
         
         <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[10px] text-[11px] font-medium text-[#6b7385]">
+          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
             <span className="w-[180px]">Drill</span>
             <span className="w-[110px]">Triggered</span>
             <span className="w-[200px]">Scenario</span>
@@ -67,7 +67,7 @@ export default function FailoverDrills() {
             <span className="w-[160px]">State</span>
           </div>
           {drillHistory.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[10px] text-[12px]">
+            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px]">
               <span className="w-[180px] text-[#171c29] font-semibold">{row.drill}</span>
               <span className="w-[110px] text-[#171c29] font-semibold">{row.triggered}</span>
               <span className="w-[200px] text-[#171c29] font-semibold">{row.scenario}</span>
