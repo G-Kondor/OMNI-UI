@@ -23,16 +23,16 @@ export default function Topbar() {
   const { isAssistOpen, setAssistOpen, setSidebarOpen } = useLayoutContext();
 
   return (
-    <div className="bg-white border-b border-[#e0e5ed] flex items-center h-[56px] px-[20px] gap-[12px] shrink-0">
+    <div className="bg-white border-b border-[#E0E5EB] flex items-center h-[56px] px-[20px] gap-[12px] shrink-0">
       {/* Hamburger for mobile */}
       <button 
-        className="lg:hidden text-[#6b7385] hover:text-[#171c29] p-1"
+        className="lg:hidden text-[#6B7280] hover:text-[#171B26] p-1"
         onClick={() => setSidebarOpen(true)}
       >
         <MenuIcon />
       </button>
       
-      <span className="font-bold text-[#171c29] text-[16px]">cast</span>
+      <span className="font-bold text-[#171B26] text-[16px]">cast</span>
       <div className="flex-1" />
       
       {/* Assist toggle button */}
@@ -40,8 +40,8 @@ export default function Topbar() {
         onClick={() => setAssistOpen(!isAssistOpen)}
         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-colors ${
           isAssistOpen 
-            ? 'bg-[#e5edff] text-[#2e6bfa]' 
-            : 'bg-[#f5f7fa] text-[#6b7385] hover:bg-[#e5edff] hover:text-[#2e6bfa]'
+            ? 'bg-[#EEF3FF] text-[#2B6BF5]' 
+            : 'bg-[#F5F7FA] text-[#6B7280] hover:bg-[#EEF3FF] hover:text-[#2B6BF5]'
         }`}
         title={isAssistOpen ? 'Close OMNI Assist' : 'Open OMNI Assist'}
       >
@@ -49,9 +49,9 @@ export default function Topbar() {
         <span className="hidden sm:inline">OMNI Assist</span>
       </button>
 
-      <span className="text-[#6b7385] text-[12px] font-medium hidden sm:block">prod-eks-gpu-eu</span>
-      <div className="bg-[#e5edff] px-[8px] py-[4px] rounded-full">
-        <span className="text-[#2e6bfa] text-[11px] font-medium">OMNI Early Access</span>
+      <span className="text-[#6B7280] text-[12px] font-medium hidden sm:block">prod-eks-gpu-eu</span>
+      <div className="bg-[#EEF3FF] px-[8px] py-[4px] rounded-full">
+        <span className="text-[#2B6BF5] text-[11px] font-medium">OMNI Early Access</span>
       </div>
     </div>
   );

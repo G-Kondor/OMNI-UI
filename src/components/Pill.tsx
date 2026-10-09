@@ -6,11 +6,11 @@ interface PillProps {
 }
 
 const variantClasses = {
-  blue: 'bg-[#e5edff] text-[#2e6bfa]',
-  green: 'bg-[#e0f5e8] text-[#219e66]',
-  amber: 'bg-[#fff2db] text-[#d9851a]',
-  red: 'bg-[#fae8eb] text-[#db3845]',
-  gray: 'bg-[#edf0f5] text-[#6b7385]',
+  blue: 'bg-[#EEF3FF] text-[#2B6BF5]',
+  green: 'bg-[#E0F5E8] text-[#21A066]',
+  amber: 'bg-[#FFF2DB] text-[#D9851A]',
+  red: 'bg-[#FAE8EB] text-[#DB3845]',
+  gray: 'bg-[#EDF0F5] text-[#6B7280]',
 };
 
 export default function Pill({ children, variant = 'blue' }: PillProps) {

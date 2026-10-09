@@ -11,9 +11,9 @@ const drillHistory = [
 ];
 
 const colors = {
-  green: 'text-[#219e66]',
-  amber: 'text-[#d9851a]',
-  blue: 'text-[#2e6bfa]',
+  green: 'text-[#21A066]',
+  amber: 'text-[#D9851A]',
+  blue: 'text-[#2B6BF5]',
 };
 
 export default function FailoverDrills() {
@@ -39,13 +39,13 @@ export default function FailoverDrills() {
       </div>
 
       <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
-        <span className="text-[#6b7385] text-[10px] font-medium">DRILL HISTORY</span>
-        <span className="text-[#6b7385] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
+        <span className="text-[#6B7280] text-[10px] font-medium">DRILL HISTORY</span>
+        <span className="text-[#6B7280] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
         
-        <div className="border border-[#e0e5ed] rounded-[8px] overflow-x-auto">
+        <div className="border border-[#E0E5EB] rounded-[8px] overflow-x-auto">
           <table className="w-full min-w-[700px]">
             <thead>
-              <tr className="bg-[#f5f7fa] border-b border-[#e0e5ed] text-[11px] font-medium text-[#6b7385]">
+              <tr className="bg-[#F5F7FA] border-b border-[#E0E5EB] text-[11px] font-medium text-[#6B7280]">
                 <th className="text-left px-3 py-2">Drill</th>
                 <th className="text-left px-3 py-2">Triggered</th>
                 <th className="text-left px-3 py-2">Scenario</th>
@@ -57,12 +57,12 @@ export default function FailoverDrills() {
             </thead>
             <tbody>
               {drillHistory.map((row, i) => (
-                <tr key={i} className="border-b border-[#e0e5ed] last:border-b-0 text-[12px]">
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.drill}</td>
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.triggered}</td>
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.scenario}</td>
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.p95}</td>
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.ttc}</td>
+                <tr key={i} className="border-b border-[#E0E5EB] last:border-b-0 text-[12px]">
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.drill}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.triggered}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.scenario}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.p95}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.ttc}</td>
                   <td className={`px-3 py-3 font-semibold ${colors[row.resultColor]}`}>{row.result}</td>
                   <td className={`px-3 py-3 font-semibold ${colors[row.stateColor]}`}>{row.state}</td>
                 </tr>
@@ -72,8 +72,8 @@ export default function FailoverDrills() {
         </div>
 
         {/* Action banner */}
-        <div className="bg-[#e5edff] rounded-[8px] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <span className="text-[#171c29] text-[12px] sm:text-[13px] font-medium">
+        <div className="bg-[#EEF3FF] rounded-[8px] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <span className="text-[#171B26] text-[12px] sm:text-[13px] font-medium">
             Ready to preview: drill-2026-10-20 — cordon eu-west-1 for 10 min. Expected spillover to us-east. Warm floor stays ≥ 4 GPUs.
           </span>
           <div className="flex gap-2 shrink-0">

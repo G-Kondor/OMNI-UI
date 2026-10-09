@@ -11,8 +11,8 @@ const endpoints = [
 ];
 
 const statusColors = {
-  green: 'text-[#219e66]',
-  amber: 'text-[#d9851a]',
+  green: 'text-[#21A066]',
+  amber: 'text-[#D9851A]',
 };
 
 const tabs = [
@@ -43,8 +43,8 @@ export default function InferenceEndpoints() {
             key={i} 
             className={`px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors ${
               tab.active 
-                ? 'bg-[#e5edff] text-[#2e6bfa]' 
-                : 'bg-white border border-[#e0e5ed] text-[#6b7385] hover:bg-gray-50'
+                ? 'bg-[#EEF3FF] text-[#2B6BF5]' 
+                : 'bg-white border border-[#E0E5EB] text-[#6B7280] hover:bg-gray-50'
             }`}
           >
             {tab.label}
@@ -53,12 +53,12 @@ export default function InferenceEndpoints() {
       </div>
 
       <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
-        <span className="text-[#6b7385] text-[10px] font-medium">ENDPOINTS</span>
+        <span className="text-[#6B7280] text-[10px] font-medium">ENDPOINTS</span>
         
-        <div className="border border-[#e0e5ed] rounded-[8px] overflow-x-auto">
+        <div className="border border-[#E0E5EB] rounded-[8px] overflow-x-auto">
           <table className="w-full min-w-[800px]">
             <thead>
-              <tr className="bg-[#f5f7fa] border-b border-[#e0e5ed] text-[11px] font-medium text-[#6b7385]">
+              <tr className="bg-[#F5F7FA] border-b border-[#E0E5EB] text-[11px] font-medium text-[#6B7280]">
                 <th className="text-left px-3 py-2">Endpoint</th>
                 <th className="text-left px-3 py-2">Model</th>
                 <th className="text-left px-3 py-2">Home</th>
@@ -70,13 +70,13 @@ export default function InferenceEndpoints() {
             </thead>
             <tbody>
               {endpoints.map((row, i) => (
-                <tr key={i} className="border-b border-[#e0e5ed] last:border-b-0 text-[12px] hover:bg-gray-50 cursor-pointer">
-                  <td className="px-3 py-3 text-[#171c29] font-semibold">{row.name}</td>
-                  <td className="px-3 py-3 text-[#171c29]">{row.model}</td>
-                  <td className="px-3 py-3 text-[#171c29]">{row.home}</td>
-                  <td className="px-3 py-3 text-[#171c29]">{row.edges}</td>
-                  <td className="px-3 py-3 text-[#171c29]">{row.routing}</td>
-                  <td className="px-3 py-3 text-[#171c29]">{row.p95}</td>
+                <tr key={i} className="border-b border-[#E0E5EB] last:border-b-0 text-[12px] hover:bg-gray-50 cursor-pointer">
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.name}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.model}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.home}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.edges}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.routing}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.p95}</td>
                   <td className={`px-3 py-3 font-semibold ${statusColors[row.statusColor]}`}>{row.status}</td>
                 </tr>
               ))}
@@ -85,18 +85,18 @@ export default function InferenceEndpoints() {
         </div>
 
         {/* Selected endpoint details */}
-        <div className="bg-[#f7fafc] rounded-[8px] p-4 flex flex-col md:flex-row gap-4">
+        <div className="bg-[#F7FAFC] rounded-[8px] p-4 flex flex-col md:flex-row gap-4">
           <div className="flex-1 flex flex-col gap-2">
-            <span className="text-[#6b7385] text-[10px] font-medium">SELECTED · llama-70b-chat</span>
-            <span className="text-[#171c29] text-[14px] font-semibold">InferencePool endpoints</span>
-            <span className="text-[#6b7385] text-[12px]">Home pods + edge pods registered. Gateway picks by KV-cache utilization, queue depth, then preferred edge order.</span>
-            <span className="text-[#171c29] text-[12px]">Direct ingress: eu-west-1, us-east-1 · ap-southeast-1 via main cluster (legacy)</span>
+            <span className="text-[#6B7280] text-[10px] font-medium">SELECTED · llama-70b-chat</span>
+            <span className="text-[#171B26] text-[14px] font-semibold">InferencePool endpoints</span>
+            <span className="text-[#6B7280] text-[12px]">Home pods + edge pods registered. Gateway picks by KV-cache utilization, queue depth, then preferred edge order.</span>
+            <span className="text-[#171B26] text-[12px]">Direct ingress: eu-west-1, us-east-1 · ap-southeast-1 via main cluster (legacy)</span>
           </div>
           <div className="flex-1 flex flex-col gap-2">
-            <span className="text-[#6b7385] text-[10px] font-medium">REPLICA MIX</span>
-            <span className="text-[#171c29] text-[13px] font-semibold">Home 6 · eu-west 4 · us-east 4 · ap-se 0 (warming)</span>
+            <span className="text-[#6B7280] text-[10px] font-medium">REPLICA MIX</span>
+            <span className="text-[#171B26] text-[13px] font-semibold">Home 6 · eu-west 4 · us-east 4 · ap-se 0 (warming)</span>
             <Pill variant="amber">Spillover armed</Pill>
-            <span className="text-[#6b7385] text-[12px]">If eu-west p95 &gt; 80 ms for 30s, shift 50% of new requests to us-east.</span>
+            <span className="text-[#6B7280] text-[12px]">If eu-west p95 &gt; 80 ms for 30s, shift 50% of new requests to us-east.</span>
           </div>
         </div>
       </Card>

@@ -85,37 +85,37 @@ export default function AssistChat({
   if (!isOpen) return null;
 
   return (
-    <div className="w-[340px] bg-white border-r border-[#e0e5ed] flex flex-col h-full shrink-0 xl:w-[340px] lg:w-[300px]">
+    <div className="w-[340px] bg-white border-r border-[#E0E5EB] flex flex-col h-full shrink-0">
       {/* Header */}
-      <div className="px-4 py-4 border-b border-[#e0e5ed]">
+      <div className="px-4 py-4 border-b border-[#E0E5EB]">
         <div className="flex items-center gap-3">
           <AIIcon />
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1">
             <div className="flex items-center gap-2">
-              <span className="text-[14px] font-semibold text-[#171c29]">OMNI Assist</span>
-              <span className="bg-[#e5edff] text-[#2e6bfa] text-[10px] font-medium px-[6px] py-[2px] rounded">+ AI</span>
+              <span className="text-[14px] font-semibold text-[#171B26]">OMNI Assist</span>
+              <span className="bg-[#EEF3FF] text-[#2B6BF5] text-[10px] font-medium px-[6px] py-[2px] rounded">+ AI</span>
               <button 
                 onClick={onToggle}
-                className="ml-auto text-[11px] text-[#6b7385] border border-[#e0e5ed] px-2 py-1 rounded hover:bg-gray-50"
+                className="ml-auto text-[11px] text-[#6B7280] border border-[#E0E5EB] px-2 py-1 rounded hover:bg-gray-50"
               >
                 {contextChip}
               </button>
             </div>
-            <span className="text-[11px] text-[#6b7385]">Act on this screen by chat</span>
+            <span className="text-[11px] text-[#6B7280]">Act on this screen by chat</span>
           </div>
         </div>
       </div>
 
       {/* Suggested prompts */}
-      <div className="px-4 py-3 border-b border-[#e0e5ed]">
-        <span className="text-[10px] text-[#6b7385] font-medium uppercase">Suggested for this screen</span>
+      <div className="px-4 py-3 border-b border-[#E0E5EB]">
+        <span className="text-[10px] text-[#6B7280] font-medium uppercase">Suggested for this screen</span>
         <div className="flex flex-col gap-2 mt-3">
           {suggestedPrompts.map((prompt, i) => (
             <button 
               key={i} 
-              className="flex items-center gap-2 text-left text-[12px] text-[#2e6bfa] hover:bg-[#f7faff] p-2 rounded-lg transition-colors group"
+              className="flex items-center gap-2 text-left text-[12px] text-[#2B6BF5] hover:bg-[#F7FAFF] p-2 rounded-lg transition-colors group"
             >
-              <span className="text-[#2e6bfa]">+</span>
+              <span className="text-[#2B6BF5]">+</span>
               <SparkleIcon />
               <span className="flex-1">{prompt.text}</span>
               <ArrowIcon />
@@ -130,12 +130,12 @@ export default function AssistChat({
           <div key={msg.id}>
             {msg.timestamp && (
               <div className="flex items-center justify-center my-3">
-                <span className="text-[10px] text-[#6b7385]">{msg.timestamp}</span>
+                <span className="text-[10px] text-[#6B7280]">{msg.timestamp}</span>
               </div>
             )}
             {msg.type === 'user' ? (
               <div className="flex justify-end mb-3">
-                <div className="bg-[#f0f3f7] text-[#171c29] text-[12px] px-3 py-2 rounded-lg max-w-[260px]">
+                <div className="bg-[#EEF1F5] text-[#171B26] text-[12px] px-3 py-2 rounded-lg max-w-[260px]">
                   {msg.text}
                 </div>
               </div>
@@ -145,24 +145,24 @@ export default function AssistChat({
                   <AvatarIcon />
                 </div>
                 <div className="flex flex-col gap-2 flex-1">
-                  <div className="bg-white border border-[#e0e5ed] rounded-lg p-3">
-                    <p className="text-[12px] text-[#171c29] leading-[1.5]">{msg.text}</p>
+                  <div className="bg-white border border-[#E0E5EB] rounded-lg p-3">
+                    <p className="text-[12px] text-[#171B26] leading-[1.5]">{msg.text}</p>
                     {msg.status && (
                       <div className="flex items-center gap-2 mt-2">
                         <span className={`inline-flex items-center gap-1 text-[11px] font-medium ${
                           msg.status.variant === 'active' 
-                            ? 'text-[#219e66]' 
-                            : 'text-[#d9851a]'
+                            ? 'text-[#21A066]' 
+                            : 'text-[#D9851A]'
                         }`}>
                           <span className={`w-[6px] h-[6px] rounded-full ${
                             msg.status.variant === 'active' 
-                              ? 'bg-[#219e66]' 
-                              : 'bg-[#d9851a]'
+                              ? 'bg-[#21A066]' 
+                              : 'bg-[#D9851A]'
                           }`} />
                           {msg.status.label}
                         </span>
                         {msg.eta && (
-                          <span className="text-[11px] text-[#6b7385]">{msg.eta}</span>
+                          <span className="text-[11px] text-[#6B7280]">{msg.eta}</span>
                         )}
                       </div>
                     )}
@@ -172,7 +172,7 @@ export default function AssistChat({
                           <button 
                             key={i}
                             onClick={action.onClick}
-                            className="text-[11px] text-[#2e6bfa] hover:underline"
+                            className="text-[11px] text-[#2B6BF5] hover:underline"
                           >
                             {action.label}
                           </button>
@@ -188,42 +188,42 @@ export default function AssistChat({
       </div>
 
       {/* Composer */}
-      <div className="px-4 py-3 border-t border-[#e0e5ed]">
-        <div className="flex items-center gap-2 bg-[#f5f7fa] rounded-lg px-3 py-2">
+      <div className="px-4 py-3 border-t border-[#E0E5EB]">
+        <div className="flex items-center gap-2 bg-[#F5F7FA] rounded-lg px-3 py-2">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Ask OMNI to..."
-            className="flex-1 bg-transparent text-[13px] text-[#171c29] placeholder-[#8c94a6] outline-none"
+            className="flex-1 bg-transparent text-[13px] text-[#171B26] placeholder-[#6B7280] outline-none"
           />
-          <button className="w-[28px] h-[28px] bg-[#2e6bfa] rounded-full flex items-center justify-center hover:bg-[#2559d4] transition-colors">
+          <button className="w-[28px] h-[28px] bg-[#2B6BF5] rounded-full flex items-center justify-center hover:bg-[#2459D4] transition-colors">
             <SendIcon />
           </button>
         </div>
-        <p className="text-[10px] text-[#8c94a6] mt-2 leading-[1.4]">
+        <p className="text-[10px] text-[#6B7280] mt-2 leading-[1.4]">
           Actions run with your Cast AI role · risky changes ask for approval.
         </p>
       </div>
 
       {/* Actions taken footer */}
       {actionsTaken.length > 0 && (
-        <div className="px-4 py-3 border-t border-[#e0e5ed] bg-[#f9fafb]">
-          <span className="text-[10px] text-[#6b7385] font-medium uppercase">Actions Taken</span>
+        <div className="px-4 py-3 border-t border-[#E0E5EB] bg-[#F9FAFB]">
+          <span className="text-[10px] text-[#6B7280] font-medium uppercase">Actions Taken</span>
           <div className="flex flex-wrap gap-2 mt-2">
             {actionsTaken.map((action, i) => (
               <span 
                 key={i}
                 className={`inline-flex items-center gap-1 text-[11px] font-medium ${
                   action.status === 'active' 
-                    ? 'text-[#219e66]' 
-                    : 'text-[#d9851a]'
+                    ? 'text-[#21A066]' 
+                    : 'text-[#D9851A]'
                 }`}
               >
                 <span className={`w-[6px] h-[6px] rounded-full ${
                   action.status === 'active' 
-                    ? 'bg-[#219e66]' 
-                    : 'bg-[#d9851a]'
+                    ? 'bg-[#21A066]' 
+                    : 'bg-[#D9851A]'
                 }`} />
                 {action.label}
               </span>
