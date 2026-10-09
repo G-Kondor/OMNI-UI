@@ -11,20 +11,20 @@ const endpoints = [
 ];
 
 const statusColors = {
-  green: 'text-[#219e66]',
-  amber: 'text-[#d9851a]',
+  green: 'text-[#21A066]',
+  amber: 'text-[#D9851A]',
 };
 
 const tabs = [
-  { label: 'All endpoints', variant: 'blue' as const },
-  { label: 'Serving', variant: 'green' as const },
-  { label: 'Degraded', variant: 'amber' as const },
-  { label: 'Cold', variant: 'gray' as const },
+  { label: 'All endpoints', variant: 'blue' as const, active: true },
+  { label: 'Serving', variant: 'green' as const, active: false },
+  { label: 'Degraded', variant: 'amber' as const, active: false },
+  { label: 'Cold', variant: 'gray' as const, active: false },
 ];
 
 export default function InferenceEndpoints() {
   return (
-    <div className="px-[24px] py-[20px] flex flex-col gap-[20px] h-full">
+    <div className="p-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:gap-5 h-full">
       <PageHeader
         title="Inference endpoints"
         subtitle="Edge replicas registered as Gateway API InferencePool endpoints — traffic routes by KV-cache and load"
@@ -36,50 +36,67 @@ export default function InferenceEndpoints() {
         }
       />
 
-      <div className="flex gap-[8px]">
+      {/* Filter tabs */}
+      <div className="flex gap-2 flex-wrap">
         {tabs.map((tab, i) => (
-          <Pill key={i} variant={tab.variant}>{tab.label}</Pill>
+          <button 
+            key={i} 
+            className={`px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors ${
+              tab.active 
+                ? 'bg-[#EEF3FF] text-[#2B6BF5]' 
+                : 'bg-white border border-[#E0E5EB] text-[#6B7280] hover:bg-gray-50'
+            }`}
+          >
+            {tab.label}
+          </button>
         ))}
       </div>
 
-      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
-        <span className="text-[#6b7385] text-[10px] font-medium">ENDPOINTS</span>
+      <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+        <span className="text-[#6B7280] text-[10px] font-medium">ENDPOINTS</span>
         
-        <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
-            <span className="w-[180px]">Endpoint</span>
-            <span className="w-[220px]">Model</span>
-            <span className="w-[140px]">Home</span>
-            <span className="w-[180px]">Edges</span>
-            <span className="w-[140px]">Routing</span>
-            <span className="w-[80px]">p95</span>
-            <span className="w-[100px]">Status</span>
-          </div>
-          {endpoints.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px] hover:bg-gray-50 cursor-pointer">
-              <span className="w-[180px] text-[#171c29] font-semibold">{row.name}</span>
-              <span className="w-[220px] text-[#171c29]">{row.model}</span>
-              <span className="w-[140px] text-[#171c29]">{row.home}</span>
-              <span className="w-[180px] text-[#171c29]">{row.edges}</span>
-              <span className="w-[140px] text-[#171c29]">{row.routing}</span>
-              <span className="w-[80px] text-[#171c29]">{row.p95}</span>
-              <span className={`w-[100px] font-semibold ${statusColors[row.statusColor]}`}>{row.status}</span>
-            </div>
-          ))}
+        <div className="border border-[#E0E5EB] rounded-[8px] overflow-x-auto">
+          <table className="w-full min-w-[800px]">
+            <thead>
+              <tr className="bg-[#F5F7FA] border-b border-[#E0E5EB] text-[11px] font-medium text-[#6B7280]">
+                <th className="text-left px-3 py-2">Endpoint</th>
+                <th className="text-left px-3 py-2">Model</th>
+                <th className="text-left px-3 py-2">Home</th>
+                <th className="text-left px-3 py-2">Edges</th>
+                <th className="text-left px-3 py-2">Routing</th>
+                <th className="text-left px-3 py-2">p95</th>
+                <th className="text-left px-3 py-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {endpoints.map((row, i) => (
+                <tr key={i} className="border-b border-[#E0E5EB] last:border-b-0 text-[12px] hover:bg-gray-50 cursor-pointer">
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.name}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.model}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.home}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.edges}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.routing}</td>
+                  <td className="px-3 py-3 text-[#171B26]">{row.p95}</td>
+                  <td className={`px-3 py-3 font-semibold ${statusColors[row.statusColor]}`}>{row.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        <div className="bg-[#f7fafc] rounded-[8px] p-[16px] flex gap-[16px]">
-          <div className="flex-1 flex flex-col gap-[8px]">
-            <span className="text-[#6b7385] text-[10px] font-medium">SELECTED · llama-70b-chat</span>
-            <span className="text-[#171c29] text-[14px] font-semibold">InferencePool endpoints</span>
-            <span className="text-[#6b7385] text-[12px]">Home pods + edge pods registered. Gateway picks by KV-cache utilization, queue depth, then preferred edge order.</span>
-            <span className="text-[#171c29] text-[12px]">Direct ingress: eu-west-1, us-east-1 · ap-southeast-1 via main cluster (legacy)</span>
+        {/* Selected endpoint details */}
+        <div className="bg-[#F7FAFC] rounded-[8px] p-4 flex flex-col md:flex-row gap-4">
+          <div className="flex-1 flex flex-col gap-2">
+            <span className="text-[#6B7280] text-[10px] font-medium">SELECTED · llama-70b-chat</span>
+            <span className="text-[#171B26] text-[14px] font-semibold">InferencePool endpoints</span>
+            <span className="text-[#6B7280] text-[12px]">Home pods + edge pods registered. Gateway picks by KV-cache utilization, queue depth, then preferred edge order.</span>
+            <span className="text-[#171B26] text-[12px]">Direct ingress: eu-west-1, us-east-1 · ap-southeast-1 via main cluster (legacy)</span>
           </div>
-          <div className="flex-1 flex flex-col gap-[8px]">
-            <span className="text-[#6b7385] text-[10px] font-medium">REPLICA MIX</span>
-            <span className="text-[#171c29] text-[13px] font-semibold">Home 6 · eu-west 4 · us-east 4 · ap-se 0 (warming)</span>
+          <div className="flex-1 flex flex-col gap-2">
+            <span className="text-[#6B7280] text-[10px] font-medium">REPLICA MIX</span>
+            <span className="text-[#171B26] text-[13px] font-semibold">Home 6 · eu-west 4 · us-east 4 · ap-se 0 (warming)</span>
             <Pill variant="amber">Spillover armed</Pill>
-            <span className="text-[#6b7385] text-[12px]">If eu-west p95 &gt; 80 ms for 30s, shift 50% of new requests to us-east.</span>
+            <span className="text-[#6B7280] text-[12px]">If eu-west p95 &gt; 80 ms for 30s, shift 50% of new requests to us-east.</span>
           </div>
         </div>
       </Card>

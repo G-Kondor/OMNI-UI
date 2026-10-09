@@ -12,15 +12,15 @@ const latencyData = [
 ];
 
 const statusColors = {
-  green: 'text-[#219e66]',
-  amber: 'text-[#d9851a]',
-  blue: 'text-[#2e6bfa]',
-  gray: 'text-[#6b7385]',
+  green: 'text-[#21A066]',
+  amber: 'text-[#D9851A]',
+  blue: 'text-[#2B6BF5]',
+  gray: 'text-[#6B7280]',
 };
 
 export default function InferenceCapacity() {
   return (
-    <div className="px-[24px] py-[20px] flex flex-col gap-[20px] h-full">
+    <div className="p-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:gap-5 h-full">
       <PageHeader
         title="Inference capacity"
         subtitle="Keep customer-facing inference inside SLO when home-region GPUs run out"
@@ -32,7 +32,8 @@ export default function InferenceCapacity() {
         }
       />
 
-      <div className="flex gap-[12px]">
+      {/* KPI Cards - responsive grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <KPICard label="P95 LATENCY" value="48 ms" subtitle="SLO 80 ms · healthy" valueColor="green" />
         <KPICard label="WARM GPU FLOOR" value="12 / 12" subtitle="Edges ready with weights" valueColor="green" />
         <KPICard label="TIME-TO-READY" value="2.4 min" subtitle="Median across edges" />
@@ -40,65 +41,73 @@ export default function InferenceCapacity() {
         <KPICard label="LAST DRILL" value="3d ago" subtitle="Passed · p95 52 ms" valueColor="green" />
       </div>
 
-      <div className="flex gap-[16px] flex-1 min-h-0">
-        <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
-          <span className="text-[#6b7385] text-[10px] font-medium">REQUEST PATH · LATENCY MATRIX</span>
-          <span className="text-[#171c29] text-[13px] font-semibold">Home: eu-central-1 → Preferred edges by p95</span>
+      {/* Main content - responsive layout */}
+      <div className="flex flex-col xl:flex-row gap-4 flex-1 min-h-0">
+        <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+          <span className="text-[#6B7280] text-[10px] font-medium">REQUEST PATH · LATENCY MATRIX</span>
+          <span className="text-[#171B26] text-[13px] font-semibold">Home: eu-central-1 → Preferred edges by p95</span>
           
-          <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden flex-1">
-            <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
-              <span className="w-[140px]">Edge</span>
-              <span className="w-[130px]">Region</span>
-              <span className="w-[90px]">p95</span>
-              <span className="w-[120px]">Weight ready</span>
-              <span className="w-[100px]">Warm floor</span>
-              <span className="w-[90px]">Status</span>
-            </div>
-            {latencyData.map((row, i) => (
-              <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px]">
-                <span className="w-[140px] text-[#171c29]">{row.edge}</span>
-                <span className="w-[130px] text-[#171c29]">{row.region}</span>
-                <span className="w-[90px] text-[#171c29]">{row.p95}</span>
-                <span className="w-[120px] text-[#171c29]">{row.weight}</span>
-                <span className="w-[100px] text-[#171c29]">{row.floor}</span>
-                <span className={`w-[90px] font-semibold ${statusColors[row.statusColor]}`}>{row.status}</span>
-              </div>
-            ))}
+          <div className="border border-[#E0E5EB] rounded-[8px] overflow-x-auto flex-1">
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr className="bg-[#F5F7FA] border-b border-[#E0E5EB] text-[11px] font-medium text-[#6B7280]">
+                  <th className="text-left px-3 py-2 w-[140px]">Edge</th>
+                  <th className="text-left px-3 py-2 w-[130px]">Region</th>
+                  <th className="text-left px-3 py-2 w-[90px]">p95</th>
+                  <th className="text-left px-3 py-2 w-[120px]">Weight ready</th>
+                  <th className="text-left px-3 py-2 w-[100px]">Warm floor</th>
+                  <th className="text-left px-3 py-2 w-[90px]">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {latencyData.map((row, i) => (
+                  <tr key={i} className="border-b border-[#E0E5EB] last:border-b-0 text-[12px]">
+                    <td className="px-3 py-3 text-[#171B26]">{row.edge}</td>
+                    <td className="px-3 py-3 text-[#171B26]">{row.region}</td>
+                    <td className="px-3 py-3 text-[#171B26]">{row.p95}</td>
+                    <td className="px-3 py-3 text-[#171B26]">{row.weight}</td>
+                    <td className="px-3 py-3 text-[#171B26]">{row.floor}</td>
+                    <td className={`px-3 py-3 font-semibold ${statusColors[row.statusColor]}`}>{row.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Card>
 
-        <Card className="w-[420px] flex flex-col gap-[12px] shrink-0">
-          <span className="text-[#6b7385] text-[10px] font-medium">SERVICE LEVEL</span>
-          <span className="text-[#171c29] text-[14px] font-semibold">Inference SLO</span>
-          <span className="text-[#6b7385] text-[12px]">p95 &lt; 80 ms · availability 99.9% (target)</span>
+        <Card className="xl:w-[380px] flex flex-col gap-3 shrink-0">
+          <span className="text-[#6B7280] text-[10px] font-medium">SERVICE LEVEL</span>
+          <span className="text-[#171B26] text-[14px] font-semibold">Inference SLO</span>
+          <span className="text-[#6B7280] text-[12px]">p95 &lt; 80 ms · availability 99.9% (target)</span>
           
-          <div className="bg-[#e5ebf2] rounded-full h-[10px] w-full">
-            <div className="bg-[#219e66] h-[10px] rounded-full" style={{ width: '85%' }} />
+          <div className="bg-[#E5EBF2] rounded-full h-[10px] w-full">
+            <div className="bg-[#21A066] h-[10px] rounded-full" style={{ width: '85%' }} />
           </div>
           
-          <span className="text-[#6b7385] text-[12px]">Current window: 99.94% · 6 breaches in 24h (all during spillover)</span>
+          <span className="text-[#6B7280] text-[12px]">Current window: 99.94% · 6 breaches in 24h (all during spillover)</span>
           
-          <span className="text-[#6b7385] text-[10px] font-medium mt-[12px]">ROUTING POLICY</span>
-          <span className="text-[#171c29] text-[12px]">Preferred: eu-west-1 → us-east-1 → ap-southeast-1</span>
-          <span className="text-[#6b7385] text-[12px]">Spillover when preferred p95 &gt; 80 ms or warm floor &lt; 50%</span>
-          <span className="text-[#171c29] text-[12px]">Direct ingress: enabled on eu-west-1, us-east-1</span>
+          <span className="text-[#6B7280] text-[10px] font-medium mt-3">ROUTING POLICY</span>
+          <span className="text-[#171B26] text-[12px]">Preferred: eu-west-1 → us-east-1 → ap-southeast-1</span>
+          <span className="text-[#6B7280] text-[12px]">Spillover when preferred p95 &gt; 80 ms or warm floor &lt; 50%</span>
+          <span className="text-[#171B26] text-[12px]">Direct ingress: enabled on eu-west-1, us-east-1</span>
           
           <Button>Edit routing policy</Button>
         </Card>
       </div>
 
-      <div className="flex gap-[16px]">
-        <Card className="flex-1 flex flex-col gap-[12px]">
-          <span className="text-[#6b7385] text-[10px] font-medium">ENDPOINTS</span>
-          <span className="text-[#171c29] text-[14px] font-semibold">llama-70b-chat · Gateway API InferencePool</span>
-          <span className="text-[#6b7385] text-[12px]">Replicas: home 6 · eu-west 4 · us-east 4 · KV-cache aware routing on</span>
+      {/* Bottom cards - responsive */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card className="flex flex-col gap-3">
+          <span className="text-[#6B7280] text-[10px] font-medium">ENDPOINTS</span>
+          <span className="text-[#171B26] text-[14px] font-semibold">llama-70b-chat · Gateway API InferencePool</span>
+          <span className="text-[#6B7280] text-[12px]">Replicas: home 6 · eu-west 4 · us-east 4 · KV-cache aware routing on</span>
           <Pill variant="green">Serving</Pill>
         </Card>
 
-        <Card className="flex-1 flex flex-col gap-[12px]">
-          <span className="text-[#6b7385] text-[10px] font-medium">WARM GPU FLOORS</span>
-          <span className="text-[#171c29] text-[14px] font-semibold">policy-inference-prod</span>
-          <span className="text-[#6b7385] text-[12px]">Keep 4× H100 in eu-west-1 and us-east-1 with llama-70b weights on NVMe. Evictor will not drain below floor.</span>
+        <Card className="flex flex-col gap-3">
+          <span className="text-[#6B7280] text-[10px] font-medium">WARM GPU FLOORS</span>
+          <span className="text-[#171B26] text-[14px] font-semibold">policy-inference-prod</span>
+          <span className="text-[#6B7280] text-[12px]">Keep 4× H100 in eu-west-1 and us-east-1 with llama-70b weights on NVMe. Evictor will not drain below floor.</span>
           <Pill variant="blue">Enforced</Pill>
         </Card>
       </div>

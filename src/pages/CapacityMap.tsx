@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -33,49 +34,73 @@ const dataCenters: DataCenter[] = [
 ];
 
 const statusConfig = {
-  home: { color: '#2e6bfa', label: 'Home', variant: 'blue' as const },
-  offer: { color: '#219e66', label: 'Best offer', variant: 'green' as const },
-  limited: { color: '#d9851a', label: 'Limited', variant: 'amber' as const },
-  ready: { color: '#219e66', label: 'Ready', variant: 'green' as const },
-  cold: { color: '#d9851a', label: 'Cold', variant: 'gray' as const },
-  new: { color: '#2e6bfa', label: 'New', variant: 'blue' as const },
-  slo: { color: '#d9851a', label: 'SLO block', variant: 'red' as const },
+  home: { color: '#2B6BF5', label: 'Home', variant: 'blue' as const },
+  offer: { color: '#21A066', label: 'Review', variant: 'green' as const },
+  limited: { color: '#D9851A', label: 'Limited', variant: 'amber' as const },
+  ready: { color: '#21A066', label: 'Ready', variant: 'green' as const },
+  cold: { color: '#D9851A', label: 'Cold', variant: 'amber' as const },
+  new: { color: '#2B6BF5', label: 'New', variant: 'blue' as const },
+  slo: { color: '#D9851A', label: 'SLO', variant: 'amber' as const },
 };
 
 interface DCCardProps {
   dc: DataCenter;
+  compact?: boolean;
 }
 
-function DCCard({ dc }: DCCardProps) {
+function DCCard({ dc, compact = false }: DCCardProps) {
   const config = statusConfig[dc.status];
   
+  if (compact) {
+    return (
+      <div className="bg-white border border-[#E0E5EB] rounded-lg p-2 shadow-lg min-w-[120px] text-[10px]">
+        <div className="flex items-center justify-between gap-1 mb-1">
+          <span className="font-bold text-[#171B26]">{dc.name}</span>
+          <Pill variant={config.variant}>{config.label}</Pill>
+        </div>
+        <span className="text-[#6B7280] text-[9px]">{dc.provider} · {dc.location}</span>
+        <div className="mt-1 text-[9px]">
+          <div className="flex justify-between">
+            <span className="text-[#6B7280]">Price</span>
+            <span className="font-semibold text-[#171B26]">{dc.price}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-[#6B7280]">p95</span>
+            <span className="font-semibold text-[#171B26]">{dc.p95}</span>
+          </div>
+        </div>
+        {dc.savings && <Pill variant="green">{dc.savings}</Pill>}
+      </div>
+    );
+  }
+  
   return (
-    <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[10px] shadow-[0px_4px_12px_0px_rgba(13,20,38,0.18)] min-w-[140px] flex flex-col gap-[6px] text-[11px]">
+    <div className="bg-white border border-[#E0E5EB] rounded-[10px] p-[10px] shadow-[0px_4px_12px_0px_rgba(13,20,38,0.18)] min-w-[140px] flex flex-col gap-[6px] text-[11px]">
       <div className="flex items-center justify-between gap-[8px]">
-        <span className="font-bold text-[#171c29] text-[12px]">{dc.name}</span>
+        <span className="font-bold text-[#171B26] text-[12px]">{dc.name}</span>
         <Pill variant={config.variant}>{config.label}</Pill>
       </div>
-      <span className="text-[#6b7385]">{dc.provider} · {dc.location}</span>
+      <span className="text-[#6B7280]">{dc.provider} · {dc.location}</span>
       <div className="flex flex-col gap-[4px]">
         <div className="flex justify-between">
-          <span className="text-[#6b7385]">Price</span>
-          <span className="font-semibold text-[#171c29]">{dc.price}</span>
+          <span className="text-[#6B7280]">Price</span>
+          <span className="font-semibold text-[#171B26]">{dc.price}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#6b7385]">p95 latency</span>
-          <span className="font-semibold text-[#171c29]">{dc.p95}</span>
+          <span className="text-[#6B7280]">p95 latency</span>
+          <span className="font-semibold text-[#171B26]">{dc.p95}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#6b7385]">GPU supply</span>
-          <span className="font-semibold text-[#171c29]">{dc.supply}</span>
+          <span className="text-[#6B7280]">GPU supply</span>
+          <span className="font-semibold text-[#171B26]">{dc.supply}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#6b7385]">Warm floor</span>
-          <span className="font-semibold text-[#171c29]">{dc.warmFloor}</span>
+          <span className="text-[#6B7280]">Warm floor</span>
+          <span className="font-semibold text-[#171B26]">{dc.warmFloor}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#6b7385]">Landed $/GPU-h</span>
-          <span className="font-semibold text-[#171c29]">{dc.landed}</span>
+          <span className="text-[#6B7280]">Landed $/GPU-h</span>
+          <span className="font-semibold text-[#171B26]">{dc.landed}</span>
         </div>
       </div>
       {dc.savings && (
@@ -86,8 +111,10 @@ function DCCard({ dc }: DCCardProps) {
 }
 
 export default function CapacityMap() {
+  const [selectedDC, setSelectedDC] = useState<string | null>(null);
+  
   return (
-    <div className="px-[24px] py-[20px] flex flex-col gap-[14px] h-full">
+    <div className="p-4 sm:px-6 sm:py-5 flex flex-col gap-4 h-full">
       <PageHeader
         title="Capacity map"
         subtitle="Earth view of datacenters with live price, latency, supply, and switch offers"
@@ -99,8 +126,8 @@ export default function CapacityMap() {
         }
       />
 
-      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
-        <span className="text-[#6b7385] text-[10px] font-medium">WORLD CAPACITY · PIN = DATACENTER</span>
+      <Card className="flex-1 flex flex-col gap-3 overflow-hidden min-h-[400px]">
+        <span className="text-[#6B7280] text-[10px] font-medium">WORLD CAPACITY · PIN = DATACENTER</span>
         
         <div className="bg-[#edf2f7] rounded-[8px] flex-1 relative overflow-hidden">
           <ComposableMap
@@ -127,45 +154,76 @@ export default function CapacityMap() {
             </Geographies>
             
             {dataCenters.map((dc) => (
-              <Marker key={dc.id} coordinates={dc.coordinates}>
+              <Marker 
+                key={dc.id} 
+                coordinates={dc.coordinates}
+                onClick={() => setSelectedDC(selectedDC === dc.id ? null : dc.id)}
+              >
                 <circle
                   r={8}
                   fill={statusConfig[dc.status].color}
                   stroke="#fff"
                   strokeWidth={2}
+                  style={{ cursor: 'pointer' }}
                 />
               </Marker>
             ))}
           </ComposableMap>
           
-          {/* Overlay cards - positioned absolutely */}
-          <div className="absolute top-4 left-4">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'us-west-2')!} />
+          {/* Desktop: Overlay cards positioned absolutely */}
+          <div className="hidden xl:block">
+            <div className="absolute top-4 left-4">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'us-west-2')!} />
+            </div>
+            <div className="absolute top-16 left-48">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'us-east-1')!} />
+            </div>
+            <div className="absolute top-4 left-[45%]">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'eu-west-1')!} />
+            </div>
+            <div className="absolute top-4 left-[55%]">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'eu-central-1')!} />
+            </div>
+            <div className="absolute top-40 left-[58%]">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'me-central-1')!} />
+            </div>
+            <div className="absolute bottom-20 left-[35%]">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'sa-east-1')!} />
+            </div>
+            <div className="absolute top-56 right-32">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'ap-southeast-1')!} />
+            </div>
+            <div className="absolute top-12 right-4">
+              <DCCard dc={dataCenters.find(dc => dc.id === 'ap-northeast-1')!} />
+            </div>
           </div>
-          <div className="absolute top-16 left-48">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'us-east-1')!} />
-          </div>
-          <div className="absolute top-4 left-[45%]">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'eu-west-1')!} />
-          </div>
-          <div className="absolute top-4 left-[55%]">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'eu-central-1')!} />
-          </div>
-          <div className="absolute top-40 left-[58%]">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'me-central-1')!} />
-          </div>
-          <div className="absolute bottom-20 left-[35%]">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'sa-east-1')!} />
-          </div>
-          <div className="absolute top-56 right-32">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'ap-southeast-1')!} />
-          </div>
-          <div className="absolute top-12 right-4">
-            <DCCard dc={dataCenters.find(dc => dc.id === 'ap-northeast-1')!} />
-          </div>
+
+          {/* Mobile/Tablet: Selected DC card */}
+          {selectedDC && (
+            <div className="xl:hidden absolute bottom-4 left-4 right-4">
+              <DCCard dc={dataCenters.find(dc => dc.id === selectedDC)!} />
+            </div>
+          )}
         </div>
         
-        <span className="text-[#6b7385] text-[11px]">
+        {/* Mobile: Scrollable DC list */}
+        <div className="xl:hidden flex gap-2 overflow-x-auto pb-2">
+          {dataCenters.map((dc) => (
+            <button 
+              key={dc.id}
+              onClick={() => setSelectedDC(dc.id)}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-medium border transition-colors ${
+                selectedDC === dc.id 
+                  ? 'bg-[#EEF3FF] border-[#2B6BF5] text-[#2B6BF5]'
+                  : 'bg-white border-[#E0E5EB] text-[#6B7280] hover:bg-gray-50'
+              }`}
+            >
+              {dc.name}
+            </button>
+          ))}
+        </div>
+        
+        <span className="text-[#6B7280] text-[10px] sm:text-[11px]">
           Pins sit on real lat/lon. Green = switch offer available · amber = warming/limited · blue = home. Cards show price, p95, GPU supply, warm floor, landed cost.
         </span>
       </Card>

@@ -8,12 +8,6 @@
   src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_0.woff2) format('woff2');
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 html, body, #root {
   height: 100%;
   width: 100%;

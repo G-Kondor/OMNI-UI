@@ -1,5 +1,6 @@
 import Button from '../components/Button';
 import Card from '../components/Card';
+import KPICard from '../components/KPICard';
 import PageHeader from '../components/PageHeader';
 
 const drillHistory = [
@@ -10,14 +11,14 @@ const drillHistory = [
 ];
 
 const colors = {
-  green: 'text-[#219e66]',
-  amber: 'text-[#d9851a]',
-  blue: 'text-[#2e6bfa]',
+  green: 'text-[#21A066]',
+  amber: 'text-[#D9851A]',
+  blue: 'text-[#2B6BF5]',
 };
 
 export default function FailoverDrills() {
   return (
-    <div className="px-[24px] py-[20px] flex flex-col gap-[20px] h-full">
+    <div className="p-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:gap-5 h-full">
       <PageHeader
         title="Failover drills & SLO"
         subtitle="Prove the guarantee: scheduled drills, p95 and time-to-capacity reports, approval before execute"
@@ -29,61 +30,53 @@ export default function FailoverDrills() {
         }
       />
 
-      <div className="flex gap-[12px]">
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
-          <span className="text-[#6b7385] text-[10px] font-medium">SLO AVAILABILITY</span>
-          <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">99.94%</span>
-          <span className="text-[#6b7385] text-[12px] mt-[12px]">Target 99.9%</span>
-        </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
-          <span className="text-[#6b7385] text-[10px] font-medium">DRILL SUCCESS</span>
-          <span className="text-[28px] font-bold text-[#219e66] leading-[34px] mt-[12px]">4 / 4</span>
-          <span className="text-[#6b7385] text-[12px] mt-[12px]">Last 90 days</span>
-        </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
-          <span className="text-[#6b7385] text-[10px] font-medium">MEDIAN TTC</span>
-          <span className="text-[28px] font-bold text-[#171c29] leading-[34px] mt-[12px]">2.4 min</span>
-          <span className="text-[#6b7385] text-[12px] mt-[12px]">Time-to-capacity</span>
-        </div>
-        <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[16px] flex-1 min-w-0 flex flex-col">
-          <span className="text-[#6b7385] text-[10px] font-medium">WORST P95</span>
-          <span className="text-[28px] font-bold text-[#d9851a] leading-[34px] mt-[12px]">52 ms</span>
-          <span className="text-[#6b7385] text-[12px] mt-[12px]">During us-east spillover</span>
-        </div>
+      {/* KPI Cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <KPICard label="SLO AVAILABILITY" value="99.94%" subtitle="Target 99.9%" valueColor="green" />
+        <KPICard label="DRILL SUCCESS" value="4 / 4" subtitle="Last 90 days" valueColor="green" />
+        <KPICard label="MEDIAN TTC" value="2.4 min" subtitle="Time-to-capacity" />
+        <KPICard label="WORST P95" value="52 ms" subtitle="During us-east spillover" valueColor="amber" />
       </div>
 
-      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
-        <span className="text-[#6b7385] text-[10px] font-medium">DRILL HISTORY</span>
-        <span className="text-[#6b7385] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
+      <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+        <span className="text-[#6B7280] text-[10px] font-medium">DRILL HISTORY</span>
+        <span className="text-[#6B7280] text-[13px]">Preview → approve → execute — same pattern as Rebalancer</span>
         
-        <div className="border border-[#e0e5ed] rounded-[8px] overflow-hidden">
-          <div className="bg-[#f5f7fa] border-b border-[#e0e5ed] flex items-center h-[36px] px-[12px] text-[11px] font-medium text-[#6b7385]">
-            <span className="w-[180px]">Drill</span>
-            <span className="w-[110px]">Triggered</span>
-            <span className="w-[200px]">Scenario</span>
-            <span className="w-[80px]">p95</span>
-            <span className="w-[90px]">TTC</span>
-            <span className="w-[100px]">Result</span>
-            <span className="w-[160px]">State</span>
-          </div>
-          {drillHistory.map((row, i) => (
-            <div key={i} className="border-b border-[#e0e5ed] last:border-b-0 flex items-center h-[48px] px-[12px] text-[12px]">
-              <span className="w-[180px] text-[#171c29] font-semibold">{row.drill}</span>
-              <span className="w-[110px] text-[#171c29] font-semibold">{row.triggered}</span>
-              <span className="w-[200px] text-[#171c29] font-semibold">{row.scenario}</span>
-              <span className="w-[80px] text-[#171c29] font-semibold">{row.p95}</span>
-              <span className="w-[90px] text-[#171c29] font-semibold">{row.ttc}</span>
-              <span className={`w-[100px] font-semibold ${colors[row.resultColor]}`}>{row.result}</span>
-              <span className={`w-[160px] font-semibold ${colors[row.stateColor]}`}>{row.state}</span>
-            </div>
-          ))}
+        <div className="border border-[#E0E5EB] rounded-[8px] overflow-x-auto">
+          <table className="w-full min-w-[700px]">
+            <thead>
+              <tr className="bg-[#F5F7FA] border-b border-[#E0E5EB] text-[11px] font-medium text-[#6B7280]">
+                <th className="text-left px-3 py-2">Drill</th>
+                <th className="text-left px-3 py-2">Triggered</th>
+                <th className="text-left px-3 py-2">Scenario</th>
+                <th className="text-left px-3 py-2">p95</th>
+                <th className="text-left px-3 py-2">TTC</th>
+                <th className="text-left px-3 py-2">Result</th>
+                <th className="text-left px-3 py-2">State</th>
+              </tr>
+            </thead>
+            <tbody>
+              {drillHistory.map((row, i) => (
+                <tr key={i} className="border-b border-[#E0E5EB] last:border-b-0 text-[12px]">
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.drill}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.triggered}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.scenario}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.p95}</td>
+                  <td className="px-3 py-3 text-[#171B26] font-semibold">{row.ttc}</td>
+                  <td className={`px-3 py-3 font-semibold ${colors[row.resultColor]}`}>{row.result}</td>
+                  <td className={`px-3 py-3 font-semibold ${colors[row.stateColor]}`}>{row.state}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        <div className="bg-[#e5edff] rounded-[8px] h-[72px] flex items-center justify-between px-[16px]">
-          <span className="text-[#171c29] text-[13px] font-medium">
+        {/* Action banner */}
+        <div className="bg-[#EEF3FF] rounded-[8px] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <span className="text-[#171B26] text-[12px] sm:text-[13px] font-medium">
             Ready to preview: drill-2026-10-20 — cordon eu-west-1 for 10 min. Expected spillover to us-east. Warm floor stays ≥ 4 GPUs.
           </span>
-          <div className="flex gap-[8px]">
+          <div className="flex gap-2 shrink-0">
             <Button>Discard</Button>
             <Button variant="primary">Execute drill</Button>
           </div>
