@@ -50,13 +50,13 @@ function DCCard({ dc }: DCCardProps) {
   const config = statusConfig[dc.status];
   
   return (
-    <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-2.5 shadow-lg min-w-[140px] flex flex-col gap-1.5 text-[11px]">
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-bold text-[#171c29] text-xs">{dc.name}</span>
+    <div className="bg-white border border-[#e0e5ed] rounded-[10px] p-[10px] shadow-[0px_4px_12px_0px_rgba(13,20,38,0.18)] min-w-[140px] flex flex-col gap-[6px] text-[11px]">
+      <div className="flex items-center justify-between gap-[8px]">
+        <span className="font-bold text-[#171c29] text-[12px]">{dc.name}</span>
         <Pill variant={config.variant}>{config.label}</Pill>
       </div>
       <span className="text-[#6b7385]">{dc.provider} · {dc.location}</span>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-[4px]">
         <div className="flex justify-between">
           <span className="text-[#6b7385]">Price</span>
           <span className="font-semibold text-[#171c29]">{dc.price}</span>
@@ -87,7 +87,7 @@ function DCCard({ dc }: DCCardProps) {
 
 export default function CapacityMap() {
   return (
-    <div className="p-6 flex flex-col gap-4 h-full">
+    <div className="px-[24px] py-[20px] flex flex-col gap-[14px] h-full">
       <PageHeader
         title="Capacity map"
         subtitle="Earth view of datacenters with live price, latency, supply, and switch offers"
@@ -99,10 +99,10 @@ export default function CapacityMap() {
         }
       />
 
-      <Card className="flex-1 flex flex-col gap-3 overflow-hidden">
+      <Card className="flex-1 flex flex-col gap-[12px] overflow-hidden">
         <span className="text-[#6b7385] text-[10px] font-medium">WORLD CAPACITY · PIN = DATACENTER</span>
         
-        <div className="bg-[#edf2f7] rounded-lg flex-1 relative overflow-hidden">
+        <div className="bg-[#edf2f7] rounded-[8px] flex-1 relative overflow-hidden">
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{

@@ -15,7 +15,7 @@ const variantClasses = {
 
 export default function Pill({ children, variant = 'blue' }: PillProps) {
   return (
-    <span className={`px-2 py-1 rounded-full text-[11px] font-medium ${variantClasses[variant]}`}>
+    <span className={`px-[8px] py-[4px] rounded-full text-[11px] font-medium ${variantClasses[variant]}`}>
       {children}
     </span>
   );

@@ -8,7 +8,7 @@ export default function Layout() {
       <Topbar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto bg-[#f6f7f9]">
           <Outlet />
         </main>
       </div>
